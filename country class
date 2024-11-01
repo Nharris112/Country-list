@@ -1,0 +1,86 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class CountriesList {
+    // Data
+    private ArrayList<String> countries;
+    private int menuOption;
+    private Scanner scanner;
+
+    public CountriesList() {
+        countries = new ArrayList<>();
+        menuOption = 0;
+        scanner = new Scanner(System.in);
+    }
+
+    public void displayWelcomeMessage() {
+        System.out.println("Welcome to Nic's Country list");
+    }
+
+    public void displayMenu() {
+        System.out.println("\nMenu:");
+        System.out.println("1. Add a country");
+        System.out.println("2. List all countries");
+        System.out.println("3. Check for a country");
+        System.out.println("4. Exit");
+        System.out.print("Enter your choice: ");
+    }
+
+    public void getMenuOption() {
+        menuOption = scanner.nextInt();
+        scanner.nextLine();
+    }
+
+    public void checkForCountry() {
+        System.out.print("Enter the country to check: ");
+        String country = scanner.nextLine();
+        if (countries.contains(country)) {
+            System.out.println(country + " is in the list.");
+        } else {
+            System.out.println(country + " is not in the list.");
+        }
+    }
+
+    public void addCountry() {
+        System.out.print("Enter the country to add: ");
+        String country = scanner.nextLine();
+        countries.add(country);
+        System.out.println(country + " has been added to the list.");
+    }
+
+    public void listCountries() {
+        System.out.println("\nCountries in the list:");
+        for (String country : countries) {
+            System.out.println("- " + country);
+        }
+    }
+
+    public static void main(String[] args) {
+        CountriesList countriesList = new CountriesList();
+        countriesList.displayWelcomeMessage();
+        
+        boolean exit = false;
+        while (!exit) {
+            countriesList.displayMenu();
+            countriesList.getMenuOption();
+
+            switch (countriesList.menuOption) {
+                case 1:
+                    countriesList.addCountry();
+                    break;
+                case 2:
+                    countriesList.listCountries();
+                    break;
+                case 3:
+                    countriesList.checkForCountry();
+                    break;
+                case 4:
+                    System.out.println("Exiting the application. Goodbye!");
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+}
