@@ -6,34 +6,23 @@ public class CountriesListApp {
         CountriesList countriesList = new CountriesList();
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("Welcome to the Countries List App!");
+        countriesList.displayWelcomeMessage();
         
         boolean exit = false;
         
         while (!exit) {
-            System.out.println("\nMenu:");
-            System.out.println("1. Display countries");
-            System.out.println("2. Add a country");
-            System.out.println("3. Exit");
-            System.out.print("Enter your choice: ");
-            
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            countriesList.displayMenu();
+            int choice = countriesList.getMenuOption();
 
             switch (choice) {
                 case 1:
-                    if (countriesList.isEmpty()) {
-                        System.out.println("The list is empty.");
-                    } else {
-                        System.out.println("Countries List:");
-                        countriesList.displayCountries();
-                    }
+                    countriesList.listCountries();
                     break;
                 
                 case 2:
                     System.out.print("Enter the name of the country: ");
                     String country = scanner.nextLine().trim();
-                    if (countriesList.containsCountry(country)) {
+                    if (countriesList.checkForCountry(country)) {
                         System.out.println("Country already exists in the list.");
                     } else {
                         countriesList.addCountry(country);
