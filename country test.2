@@ -1,55 +1,53 @@
-import java.util.Collections;
 import java.util.Scanner;
 
 public class CountriesListApp {
+
     public static void main(String[] args) {
         CountriesList countriesList = new CountriesList();
-      
-        countriesList.displayWelcomeMessage();
-        
         Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Welcome to the Countries List App!");
+        
         boolean exit = false;
-
+        
         while (!exit) {
             System.out.println("\nMenu:");
             System.out.println("1. Display countries");
             System.out.println("2. Add a country");
             System.out.println("3. Exit");
             System.out.print("Enter your choice: ");
+            
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                    if (countriesList.getCountries().isEmpty()) {
-                        System.out.println("The list of countries is currently empty.");
+                    if (countriesList.isEmpty()) {
+                        System.out.println("The list is empty.");
                     } else {
-                        System.out.println("\nCountries in the list (sorted):");
-                        Collections.sort(countriesList.getCountries());
-                        for (String country : countriesList.getCountries()) {
-                            System.out.println("- " + country);
-                        }
+                        System.out.println("Countries List:");
+                        countriesList.displayCountries();
                     }
                     break;
-
+                
                 case 2:
-                    System.out.print("Enter the country to add: ");
-                    String country = scanner.nextLine();
-                    if (countriesList.getCountries().contains(country)) {
-                        System.out.println(country + " is already in the list.");
+                    System.out.print("Enter the name of the country: ");
+                    String country = scanner.nextLine().trim();
+                    if (countriesList.containsCountry(country)) {
+                        System.out.println("Country already exists in the list.");
                     } else {
                         countriesList.addCountry(country);
-                        System.out.println(country + " has been added to the list.");
+                        System.out.println("Country added successfully!");
                     }
                     break;
-
+                
                 case 3:
                     System.out.println("Exiting the program. Goodbye!");
                     exit = true;
                     break;
-
+                
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println("Invalid choice. Please try again.");
             }
         }
         
